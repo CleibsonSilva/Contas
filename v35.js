@@ -10,10 +10,13 @@ function v35Snapshot(){v35Undo=JSON.stringify(data)}
 function v35Restore(){if(!v35Undo)return;data=JSON.parse(v35Undo);v35Undo=null;save();render();v35Toast('Ação desfeita');}
 function v35Nav(s){
  v35Screen=s;
- const panels={home:['debtSummaryPanel','chartPanel'],records:['expensesPanel','incomePanel','historyPanel'],budgets:['budgetPanel'],more:['cardsPanel','v35Extras']};
+ const panels={home:['chartPanel'],records:['expensesPanel','incomePanel','historyPanel'],budgets:['budgetPanel'],more:['cardsPanel','v35Extras']};
  for(const id of ['debtSummaryPanel','chartPanel','budgetPanel','cardsPanel','expensesPanel','incomePanel','historyPanel','v35Extras']){
   $(id)?.classList.toggle('screen-hidden',!panels[s].includes(id));
  }
+ $('v35Shortcuts')?.classList.toggle('screen-hidden',s!=='home');
+ document.querySelector('.footer')?.classList.toggle('screen-hidden',s!=='more');
+ v35CustomApply();
  document.querySelectorAll('.v35-bottom button').forEach(b=>b.classList.toggle('active',b.id==='vnav-'+s));
  $('screenFab').textContent=s==='records'?'＋ Nova despesa':s==='budgets'?'＋ Abater compra':s==='more'?'＋ Nova compra':'＋ Nova despesa';
  window.scrollTo({top:0,behavior:'instant'});
@@ -21,8 +24,10 @@ function v35Nav(s){
 const oldApplyScreen=applyScreen;
 applyScreen=function(){oldApplyScreen();v35NavKeep()};
 function v35NavKeep(){
- const panels={home:['debtSummaryPanel','chartPanel'],records:['expensesPanel','incomePanel','historyPanel'],budgets:['budgetPanel'],more:['cardsPanel','v35Extras']};
+ const panels={home:['chartPanel'],records:['expensesPanel','incomePanel','historyPanel'],budgets:['budgetPanel'],more:['cardsPanel','v35Extras']};
  for(const id of ['debtSummaryPanel','chartPanel','budgetPanel','cardsPanel','expensesPanel','incomePanel','historyPanel','v35Extras'])$(id)?.classList.toggle('screen-hidden',!panels[v35Screen].includes(id));
+ $('v35Shortcuts')?.classList.toggle('screen-hidden',v35Screen!=='home');
+ document.querySelector('.footer')?.classList.toggle('screen-hidden',v35Screen!=='more');
 }
 screenQuick=function(){if(v35Screen==='budgets')return openBudgetSpend();if(v35Screen==='more')return openCardPurchase();openForm()};
 function v35Extras(){
@@ -35,7 +40,7 @@ function v35Extras(){
  <button class="secondary" onclick="v35Subscriptions()">🔁 Assinaturas</button><button class="secondary" onclick="v35Customize()">⚙ Personalizar</button>
  <button class="secondary" onclick="v35Pix()">☕ Pix R$ 2</button><button class="secondary" onclick="openSettings()">🛡 Backup</button></div>
  <div id="v35Content" aria-live="polite"></div>`;
- document.querySelector('main').appendChild(el);
+ document.querySelector('.footer').before(el);
 }
 function v35Show(title,body){v35Nav('more');$('v35Content').innerHTML=`<div class="v35-card"><h3>${esc(title)}</h3>${body}</div>`; $('v35Content').scrollIntoView({behavior:'smooth',block:'start'})}
 function v35Calendar(){
