@@ -1,1 +1,25 @@
-{"name":"Vértice — Meu dinheiro","short_name":"Vértice","description":"Controle de dívidas, rendas e despesas, sem precisar de conta.","start_url":"./","scope":"./","display":"standalone","background_color":"#f3f6f5","theme_color":"#172c35","icons":[{"src":"./icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},{"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
+{
+  "name": "Finanças — Contas e Rendas",
+  "short_name": "Finanças",
+  "description": "Controle suas dívidas, despesas, rendas e orçamento.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070e20",
+  "theme_color": "#080f24",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "id": "./financas-app"
+}
