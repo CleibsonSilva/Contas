@@ -26,7 +26,7 @@ function despesasAfterRender(){
  const due=monthData(cursor).filter(x=>!x.archived&&x.remaining>0).sort((a,b)=>a.dueDate-b.dueDate).slice(0,5);
  const dueBox=$('despesasDue');if(dueBox)dueBox.innerHTML='<div class="section"><h2>Próximos vencimentos</h2></div>'+(due.length?due.map(x=>`<div class="rowlist between"><span>${esc(x.name)}<small class="subtle" style="display:block">${x.dueDate.toLocaleDateString('pt-BR')} · ${status(x)==='overdue'?'🔴 Vencida':'A pagar'}</small></span><b class="sensitive" style="color:${status(x)==='overdue'?'#ff7777':'inherit'}">${money(x.remaining)}</b></div>`).join(''):'<p class="subtle">Nenhuma conta pendente neste mês.</p>');
 
- // Versão 4.5: contas atrasadas permanecem até quitação, sem limite retroativo.
+ // Versão 4.5.1: renderização completa restaurada; vencidos até quitação.
  // Apenas os vencimentos futuros têm janela de 10 dias.
  const dueList=$('dueTenDays');
  if(dueList){

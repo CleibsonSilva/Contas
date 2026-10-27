@@ -1,0 +1,5 @@
+Despesas 4.6 — correção auditada
+
+Correções: cartões criados aparecem na lista e podem ser editados; formulário fecha após salvar; fechamento e vencimento usam dia do mês (1–31); vencimentos atrasados permanecem até pagamento; compromisso de renda calculado; rendas cadastradas acessíveis pelo botão Ver rendas; painel de despesas sem caixas aninhadas e com largura útil maior.
+
+Não altera a chave de armazenamento local (vertice-v3). Faça backup JSON antes de publicar. Testar no GitHub Pages após atualização do service worker.

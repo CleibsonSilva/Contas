@@ -1,0 +1,7 @@
+DESPESAS v4.6 — RELATÓRIO DE VERIFICAÇÃO
+
+Correções: cartões salvos visíveis/editáveis, modal fecha após salvar, dias 1–31; renda visível/editável; comprometimento da renda; contas vencidas até quitação, inclusive pagamento parcial; caixas aninhadas e largura da lista; proteção contra transações antigas sem data; cache PWA atualizado.
+
+TESTES: Chromium em viewport móvel 390px, com dados fictícios; 15 verificações de interface e regras financeiras aprovadas (vencimento antigo, parcial, quitado, recorrência, renda, edição de cartão, primeira compra, abas e layout). Sem erros JavaScript observados. Sintaxe de todos os JS e integridade ZIP verificadas.
+
+LIMITAÇÕES: Não foi testado em Android físico nem com os dados privados do usuário. Teste local de navegador usou persistência simulada; validar salvamento no GitHub Pages. Não é possível garantir ausência de bugs em cenários não cobertos. Fazer backup JSON antes de publicar.
