@@ -1,0 +1,1 @@
+Despesas v3.6.3: substitui o gráfico Gastos por mês por vencimentos pendentes (últimos 10 dias e próximos 10 dias), com data, valor e destaque para atrasados. Nenhum dado financeiro é apagado. Faça backup antes de publicar.

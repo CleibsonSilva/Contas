@@ -1,0 +1,5 @@
+Despesas 4.5 — Correção de vencimentos pendentes
+
+Contas vencidas continuam em Próximos vencimentos até quitação integral, independentemente da antiguidade. Pagamentos parciais mostram saldo remanescente. Vencimentos futuros aparecem até 10 dias adiante. Contas quitadas não aparecem. Inclui parcelas de cartão ainda pendentes.
+
+Antes de publicar, exporte backup JSON. Os dados locais não são apagados por esta atualização. Teste no dispositivo antes de substituir a versão de produção.

@@ -26,22 +26,29 @@ function despesasAfterRender(){
  const due=monthData(cursor).filter(x=>!x.archived&&x.remaining>0).sort((a,b)=>a.dueDate-b.dueDate).slice(0,5);
  const dueBox=$('despesasDue');if(dueBox)dueBox.innerHTML='<div class="section"><h2>Próximos vencimentos</h2></div>'+(due.length?due.map(x=>`<div class="rowlist between"><span>${esc(x.name)}<small class="subtle" style="display:block">${x.dueDate.toLocaleDateString('pt-BR')} · ${status(x)==='overdue'?'🔴 Vencida':'A pagar'}</small></span><b class="sensitive" style="color:${status(x)==='overdue'?'#ff7777':'inherit'}">${money(x.remaining)}</b></div>`).join(''):'<p class="subtle">Nenhuma conta pendente neste mês.</p>');
 
- // Vencimentos: 10 dias à frente, além dos vencidos nos últimos 10 dias.
- // A lista usa a data real de hoje, independentemente do mês selecionado.
+ // Versão 4.5: contas atrasadas permanecem até quitação, sem limite retroativo.
+ // Apenas os vencimentos futuros têm janela de 10 dias.
  const dueList=$('dueTenDays');
  if(dueList){
-   const start=parse(today()),past=new Date(start),future=new Date(start);
-   past.setDate(past.getDate()-10);future.setDate(future.getDate()+10);
-   const pendingEntries=data.items.filter(d=>!d.archived&&d.kind!=='spent')
-     .flatMap(d=>datesFor(d,past,future))
-     .filter(x=>x.remaining>0.005);
-   // Inclui faturas de cartão registradas pelo motor existente.
+   const start=parse(today()), future=new Date(start);
+   future.setDate(future.getDate()+10);
+   const pendingEntries=data.items.filter(d=>!d.archived&&d.kind!=='spent'&&d.due)
+     .flatMap(d=>datesFor(d,parse(d.due),future))
+     .filter(x=>x.remaining>0.005&&x.dueDate<=future);
    const cardEntries=[];
-   for(let monthOffset=-1;monthOffset<=1;monthOffset++){
-     const month=new Date(start.getFullYear(),start.getMonth()+monthOffset,1);
-     cardEntries.push(...cardOccurrences(month).filter(x=>x.dueDate>=past&&x.dueDate<=future&&x.remaining>0.005));
+   const lastMonth=new Date(future.getFullYear(),future.getMonth(),1);
+   for(const purchase of data.cardPurchases||[]){
+     if(!purchase.firstMonth)continue;
+     const first=parse(purchase.firstMonth+'-01');
+     if(!Number.isFinite(first.getTime())||first>lastMonth)continue;
+     const maxMonths=Math.min(Math.max(0,Number(purchase.count)||0),4800);
+     for(let i=0;i<maxMonths;i++){
+       const month=addMonths(first,i);
+       if(month>lastMonth)break;
+       cardEntries.push(...cardOccurrences(month).filter(x=>x.id===purchase.id&&x.dueDate<=future&&x.remaining>0.005));
+     }
    }
-   const all=[...pendingEntries,...cardEntries].sort((a,b)=>a.dueDate-b.dueDate);
+   const all=[...pendingEntries,...cardEntries].sort((a,b)=>a.dueDate-b.dueDate||a.name.localeCompare(b.name));
    dueList.innerHTML=all.length?all.map(x=>{
      const days=Math.round((x.dueDate-start)/86400000);
      const overdue=days<0;
@@ -51,7 +58,7 @@ function despesasAfterRender(){
        <small class="subtle">${x.dueDate.toLocaleDateString('pt-BR')} · <span style="color:${overdue?'#ff8ea8':'#aabdf4'}">${when}</span></small></div>
        <b class="sensitive" style="white-space:nowrap;color:${overdue?'#ff8ea8':'#eef2ff'}">${money(x.remaining)}</b>
      </div>`;
-   }).join(''):'<div class="empty">Nenhuma conta vencida nos últimos 10 dias ou a vencer nos próximos 10 dias.</div>';
+   }).join(''):'<div class="empty">Nenhuma conta vencida pendente ou com vencimento nos próximos 10 dias.</div>';
  }
  const inc=incomeEntries(cursor).reduce((s,x)=>s+Number(x.value),0),out=monthData(cursor).reduce((s,x)=>s+x.value,0),sp=data.budgetSpends.filter(x=>x.date.startsWith(mk(cursor))).reduce((s,x)=>s+x.value,0);
  const forecast=$('despesasForecast');if(forecast)forecast.innerHTML=`<div class="between"><b>Previsão do mês</b><b class="sensitive">${money(inc-out-sp)}</b></div><small class="subtle">Estimativa baseada nos registros cadastrados.</small>`;
