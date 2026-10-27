@@ -1,0 +1,6 @@
+Despesas v3.6.1 — correção de layout da versão 3.6.
+
+Corrige a ordem do resumo, abas e painel; remove navegação antiga e controles duplicados; reduz sobreposição do botão flutuante; atualiza cache do PWA.
+
+Antes de publicar, exporte backup JSON dos seus dados. Não limpe armazenamento local.
+Ainda é necessária validação funcional em navegador e celular antes de usar como versão definitiva.

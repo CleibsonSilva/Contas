@@ -1,0 +1,1 @@
+Despesas v3.6.2 — remoção dos atalhos Calendário, Relatórios e Assinaturas da interface de Despesas. Mantidas funções internas e dados existentes. Faça backup antes de publicar. Não apague dados locais.

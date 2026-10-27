@@ -6,6 +6,8 @@ function despesasTab(tab){
  ['cardsPanel','budgetPanel','expensesPanel','incomePanel','historyPanel'].forEach(id=>$(id)?.classList.toggle('screen-hidden',!groups[tab].includes(id)));
  document.querySelectorAll('#despesasTabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
  $('screenFab').textContent=tab==='cards'?'＋ Nova compra':tab==='budgets'?'＋ Abater valor':'＋ Nova despesa';
+ document.querySelectorAll('#despesasTabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===tab)));
+ $('despesasPanelHost')?.setAttribute('aria-label',tab==='cards'?'Cartões':tab==='budgets'?'Orçamentos':'Despesas');
 }
 // Preserve old functions for backups and financial calculations.
 const despesasOriginalRender=render;
@@ -66,7 +68,7 @@ const despesasOldBudgetEnhance=v35EnhanceBudgets;
 v35EnhanceBudgets=function(){despesasOldBudgetEnhance();document.querySelectorAll('.v35-budget-actions').forEach(row=>{const a=row.querySelector('button:first-child'),b=row.querySelector('button:last-child');if(a){a.className='primary';a.textContent='− Abater valor'}if(b){b.textContent='Excluir';b.title='Excluir orçamento'}})};
 // Frequently used tools placed in context.
 function despesasContextTools(){
- const records=$('expensesPanel');if(records&&!$('despesasRecordsTools')){const el=document.createElement('div');el.id='despesasRecordsTools';el.className='v35-tools';el.innerHTML='<button class="secondary" onclick="v35Calendar()">📅 Calendário</button><button class="secondary" onclick="v35Comparison()">📊 Relatórios</button><button class="secondary" onclick="v35Subscriptions()">↻ Assinaturas</button>';records.append(el)}
+ const records=$('expensesPanel');if(records&&!$('despesasRecordsTools')){const el=document.createElement('div');el.id='despesasRecordsTools';el.className='v35-tools';el.remove()}
  const dialog=$('debtDialog');if(dialog&&!$('despesasFavorites')){const btn=document.createElement('button');btn.id='despesasFavorites';btn.className='secondary';btn.type='button';btn.textContent='⭐ Reutilizar despesa';btn.onclick=()=>v35Favorites();dialog.querySelector('#debtForm')?.prepend(btn)}
  const footer=document.querySelector('.footer');if(footer)footer.classList.remove('screen-hidden');
 }
