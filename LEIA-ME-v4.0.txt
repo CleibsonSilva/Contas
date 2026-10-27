@@ -1,0 +1,8 @@
+Despesas 4.0 - atualização da interface.
+- Nenhuma aba aberta inicialmente; só um painel de cada vez.
+- Rendas e histórico fora das abas, com acesso rápido.
+- Nova despesa sempre abre despesa, botão verde.
+- Indicador de comprometimento recalculado.
+- Próximos vencimentos no lugar do gráfico.
+- Preserva o formato de dados local anterior.
+Faça backup antes de publicar e teste em dispositivo.
