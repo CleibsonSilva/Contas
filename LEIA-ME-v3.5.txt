@@ -1,0 +1,26 @@
+FINANÇAS v3.5 — VERSÃO EXPERIMENTAL
+
+Instalação: faça backup JSON no aplicativo antigo antes de publicar; envie os arquivos index.html, app.js, v35.js, sw.js, manifest.webmanifest e ícones para a raiz do GitHub Pages.
+
+Novidades implementadas nesta versão experimental:
+- Navegação inferior em quatro áreas, preservando o armazenamento da v3.4.
+- Orçamentos com ação de abater e exclusão do limite (gastos históricos mantidos).
+- Cadastro de cartões com datas de calendário (dias 1–31).
+- Mover despesa avulsa/única não paga para cartão, sem duplicar o lançamento.
+- Cofrinho com depósitos, retiradas e histórico.
+- Pesquisa global, calendário financeiro em lista por data, previsão, comparativo mensal.
+- Despesas favoritas por reutilização, lista de recorrências, exportação CSV e impressão para PDF.
+- Personalização básica do início e Pix Copia e Cola/QR code (QR requer internet).
+- Desfazer para algumas operações novas (por 7 segundos).
+
+LIMITAÇÕES CONHECIDAS:
+- Calendário financeiro usa uma lista cronológica com seletor de mês, não grade de dias.
+- Avisos de vencimento reutilizam os avisos internos existentes; push com app fechado não está implementado.
+- Assinaturas reutilizam as despesas recorrentes existentes.
+- Exportar PDF abre a impressão do navegador; escolha Salvar como PDF.
+- Favoritos sugeridos vêm de despesas existentes, sem marcação manual.
+- Cofrinho é um registro de reserva separado, não conectado a contas bancárias reais.
+- Personalização contempla inicialmente gráfico e histórico.
+- O desfazer não cobre todas as ações antigas.
+- Os valores financeiros dependem dos dados inseridos e devem ser conferidos antes do uso real.
+- Não foi possível realizar testes de navegação em navegador neste ambiente; esta é uma versão para testes, não uma migração validada em produção.
