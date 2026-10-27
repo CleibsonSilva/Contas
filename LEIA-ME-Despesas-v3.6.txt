@@ -1,0 +1,10 @@
+DESPESAS v3.6 — atualização experimental
+
+Publique os arquivos da pasta na raiz do repositório GitHub Pages.
+Antes de substituir a versão atual, exporte um backup JSON e mantenha uma cópia do ZIP antigo.
+
+Mudanças: novo nome, três abas integradas (Cartões/Orçamentos/Despesas), remoção da barra inferior, remoção visual de Ferramentas e Cofrinho, valores sempre visíveis, categorias com emoji automático, configurações agrupadas, histórico de abatimentos recolhido, descrição opcional no abatimento, botão Abater em destaque, continuação da compra após cadastrar cartão, pesquisa no topo, vencimentos e previsão na página inicial.
+
+Dados: a chave de armazenamento original vertice-v3 é preservada; não apague os dados do navegador. Registros antigos do Cofrinho não são excluídos automaticamente para evitar perda de dados.
+
+Validação: ZIP e sintaxe JavaScript verificados. Os fluxos no navegador e migração de dados reais ainda exigem testes antes da publicação definitiva. A prévia de ícones no seletor nativo depende do sistema operacional.

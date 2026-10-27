@@ -1,7 +1,7 @@
 {
-  "name": "Finanças — Contas e Rendas",
-  "short_name": "Finanças",
-  "description": "Controle suas dívidas, despesas, rendas e orçamento.",
+  "name": "Despesas — Controle financeiro",
+  "short_name": "Despesas",
+  "description": "Gerencie despesas, cartões, rendas e orçamentos.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

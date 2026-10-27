@@ -83,12 +83,12 @@ function v35UseFavorite(name){
 function v35Download(content,name,type){const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function v35ExportCSV(){
  const rows=[['Tipo','Descrição','Categoria','Valor','Data'],...data.items.map(x=>['Despesa',x.name,x.category,x.value,x.due]),...data.incomes.map(x=>['Renda',x.name,'',x.value,x.date]),...data.cardPurchases.map(x=>['Cartão',x.name,x.category,x.value,x.firstMonth]),...data.budgetSpends.map(x=>['Orçamento',x.name,x.category,x.value,x.date])];
- v35Download('\ufeff'+rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(';')).join('\r\n'),'financas-'+today()+'.csv','text/csv;charset=utf-8');
+ v35Download('\ufeff'+rows.map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(';')).join('\r\n'),'despesas-'+today()+'.csv','text/csv;charset=utf-8');
 }
 function v35ExportPDF(){
  v35Comparison();const content=$('v35Content').innerText,w=window.open('','_blank');
  if(!w)return alert('Permita pop-ups para imprimir/salvar como PDF.');
- w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Relatório Finanças</title></head><body><h1>Finanças — Relatório</h1><pre style="white-space:pre-wrap;font:14px Arial">'+esc(content)+'</pre></body></html>');w.document.close();w.print();
+ w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>Relatório Finanças</title></head><body><h1>Despesas — Relatório</h1><pre style="white-space:pre-wrap;font:14px Arial">'+esc(content)+'</pre></body></html>');w.document.close();w.print();
 }
 function v35Subscriptions(){
  const recurring=data.items.filter(x=>['recurring','monthly','custom'].includes(x.kind));
